@@ -1,8 +1,8 @@
 "use client"
 
-import { ActionIcon, AppShell, Burger, Button, Group, Skeleton, Text, useComputedColorScheme, useMantineColorScheme } from "@mantine/core"
+import { ActionIcon, AppShell, Burger, Button, Group, Text, useComputedColorScheme, useMantineColorScheme } from "@mantine/core"
 import { useDisclosure } from "@mantine/hooks"
-import { IconMoon, IconSun } from "@tabler/icons-react"
+import { IconMoon, IconSun, IconHome2, IconBox } from "@tabler/icons-react"
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -19,8 +19,8 @@ export default function BaseLayout({ children }: Readonly<{ children: React.Reac
       className={computedColorScheme === "light" ? "text-black bg-white" : "text-white bg-[#242424]"}
       header={{ height: 60 }}
       footer={{ height: 60 }}
-      navbar={{ width: 250, breakpoint: "sm", collapsed: { mobile: !opened } }}
-      aside={{ width: 250, breakpoint: "md", collapsed: { desktop: false, mobile: true } }}
+      navbar={{ width: 90, breakpoint: "sm", collapsed: { mobile: !opened } }}
+      aside={{ width: 300, breakpoint: "md", collapsed: { desktop: false, mobile: true } }}
       padding="md"
     >
       <AppShell.Header>
@@ -36,10 +36,10 @@ export default function BaseLayout({ children }: Readonly<{ children: React.Reac
       </AppShell.Header>
       <AppShell.Navbar p="md" className="gap-2">
         <Button component={Link} href={"/"} variant={pathname === "/" ? "filled" : "default"} fullWidth>
-          Home
+          <IconHome2 size={15} />
         </Button>
         <Button component={Link} href={"/discover"} variant={pathname === "/discover" ? "filled" : "default"} fullWidth>
-          Discover
+          <IconBox size={15} />
         </Button>
       </AppShell.Navbar>
 
