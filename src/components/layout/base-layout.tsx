@@ -2,11 +2,10 @@
 
 import { ActionIcon, AppShell, Burger, Button, Group, Text, useComputedColorScheme, useMantineColorScheme } from "@mantine/core"
 import { useDisclosure } from "@mantine/hooks"
-import { IconMoon, IconSun, IconHome2, IconBox } from "@tabler/icons-react"
+import { IconMoon, IconSun, IconHome2, IconBox, IconShoppingBag } from "@tabler/icons-react"
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import CartLayout from "./cart-layout"
 
 export default function BaseLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const pathname = usePathname()
@@ -20,7 +19,6 @@ export default function BaseLayout({ children }: Readonly<{ children: React.Reac
       header={{ height: 60 }}
       footer={{ height: 60 }}
       navbar={{ width: 90, breakpoint: "sm", collapsed: { mobile: !opened } }}
-      aside={{ width: 300, breakpoint: "md", collapsed: { desktop: false, mobile: true } }}
       padding="md"
     >
       <AppShell.Header>
@@ -35,20 +33,20 @@ export default function BaseLayout({ children }: Readonly<{ children: React.Reac
         </Group>
       </AppShell.Header>
       <AppShell.Navbar p="md" className="gap-2">
-        <Button component={Link} href={"/"} variant={pathname === "/" ? "filled" : "default"} fullWidth>
+        <Button component={Link} href={"/"} variant={pathname === "/" ? "outline" : "default"}>
           <IconHome2 size={15} />
         </Button>
-        <Button component={Link} href={"/discover"} variant={pathname === "/discover" ? "filled" : "default"} fullWidth>
+        <Button component={Link} href={"/discover"} variant={pathname === "/discover" ? "outline" : "default"}>
           <IconBox size={15} />
+        </Button>
+        <Button component={Link} href={"/cart"} variant={pathname === "/cart" ? "outline" : "default"}>
+          <IconShoppingBag size={15} />
         </Button>
       </AppShell.Navbar>
 
       <AppShell.Main>{children}</AppShell.Main>
-      <AppShell.Aside p="md">
-        <CartLayout />
-      </AppShell.Aside>
       <AppShell.Footer p="md" className="text-center">
-        <Text>
+        <Text size="sm">
           Build by{" "}
           <Link className="underline underline-offset-4 hover:text-gray-200 transition duration-300" href={"https://github.com/rizkyhaksono"} target="_blank">
             Rizky Haksono
