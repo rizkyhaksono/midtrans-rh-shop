@@ -24,7 +24,7 @@ export default function BaseLayout({ children }: Readonly<{ children: React.Reac
       <AppShell.Header>
         <Group className="flex justify-between" h="100%" px="md">
           <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
-          <Link href={"https://rizkyhaksono.natee.my.id"}>
+          <Link href={"/"}>
             <Image src={"https://rizkyhaksono.natee.my.id/favicon.ico"} alt="Logo" width={30} height={30} />
           </Link>
           <ActionIcon onClick={() => setColorScheme(computedColorScheme === "light" ? "dark" : "light")} variant="default" size={30} aria-label="Toggle color scheme">
@@ -32,7 +32,7 @@ export default function BaseLayout({ children }: Readonly<{ children: React.Reac
           </ActionIcon>
         </Group>
       </AppShell.Header>
-      <AppShell.Navbar p="md" className="gap-2">
+      <AppShell.Navbar p="md" className="gap-2 w-fit">
         <Button component={Link} href={"/"} variant={pathname === "/" ? "outline" : "default"}>
           <IconHome2 size={15} />
         </Button>
@@ -43,7 +43,6 @@ export default function BaseLayout({ children }: Readonly<{ children: React.Reac
           <IconShoppingBag size={15} />
         </Button>
       </AppShell.Navbar>
-
       <AppShell.Main>{children}</AppShell.Main>
       <AppShell.Footer p="md" className="text-center">
         <Text size="sm">

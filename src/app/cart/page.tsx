@@ -2,9 +2,29 @@
 
 import { Button, Text, Container } from "@mantine/core"
 import useCart from "@/components/hooks/useCart"
+import { useRouter } from "next/navigation"
 
 export default function CartPage() {
+  const router = useRouter()
   const { cart, addToCart, removeFromCart } = useCart()
+
+  console.log(JSON.stringify(cart))
+
+  // hanndle purchase now
+  const handlePurchase = async () => {
+    const response = await fetch("/api/payment", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(cart),
+    })
+
+    const data = await response.json()
+    console.log(data)
+    router.push(data.redirect_url)
+    localStorage.setItem("cart", JSON.stringify([]))
+  }
 
   return (
     <Container>
@@ -33,17 +53,24 @@ export default function CartPage() {
         ))}
       </div>
 
-      <div className="flex justify-center">
+      <div className="flex justify-center gap-5 mt-5">
         {cart.length > 0 ? (
-          <Button
-            className="mt-4"
-            fullWidth
-            onClick={() => {
-              localStorage.setItem("cart", JSON.stringify([]))
-            }}
-          >
-            Clear Cart
-          </Button>
+          <>
+            <Button
+              className="mt-4"
+              fullWidth
+              color="red"
+              variant="filled"
+              onClick={() => {
+                localStorage.setItem("cart", JSON.stringify([]))
+              }}
+            >
+              Clear Cart
+            </Button>
+            <Button className="mt-4" fullWidth color="blue" variant="filled" onClick={handlePurchase}>
+              Purchase Now
+            </Button>
+          </>
         ) : (
           <Text size="md">No Items</Text>
         )}

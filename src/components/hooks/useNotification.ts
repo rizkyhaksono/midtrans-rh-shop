@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 
-function useNotification() {
+export default function useNotification() {
   const [showNotification, setShowNotification] = useState(false)
 
   const handleNotification = () => {
@@ -14,5 +14,3 @@ function useNotification() {
 
   return { showNotification, handleNotification }
 }
-
-export default useNotification

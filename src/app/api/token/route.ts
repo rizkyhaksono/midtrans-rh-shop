@@ -1,7 +1,9 @@
+// @ts-ignore
+// because midtrans doesn't have types
 import Midtrans from "midtrans-client"
 import { NextResponse, NextRequest } from "next/server"
 
-export async function POST(req, res) {
+export async function POST(req: NextRequest, res: NextResponse) {
   const snap = new Midtrans.Snap({
     isProduction: false,
     serverKey: process.env.SECRET,

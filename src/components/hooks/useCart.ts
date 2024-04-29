@@ -2,8 +2,15 @@
 
 import { useEffect, useState } from "react"
 
-function useCart() {
-  const [cart, setCart] = useState<{ title: string; price: number; quantity: number }[]>([])
+interface CartItem {
+  id: string
+  title: string
+  price: number
+  quantity: number
+}
+
+export default function useCart() {
+  const [cart, setCart] = useState<CartItem[]>([])
 
   useEffect(() => {
     const cartData = localStorage.getItem("cart")
@@ -14,7 +21,7 @@ function useCart() {
     }
   }, [])
 
-  const addToCart = (itemToAdd: { title: string; price: number; quantity: number }) => {
+  const addToCart = (itemToAdd: CartItem) => {
     const updatedCart = [...cart]
     const existingItemIndex = updatedCart.findIndex((item) => item.title === itemToAdd.title)
 
@@ -28,7 +35,7 @@ function useCart() {
     setCart(updatedCart)
   }
 
-  const removeFromCart = (itemToRemove: { title: string; price: number; quantity: number }) => {
+  const removeFromCart = (itemToRemove: CartItem) => {
     const updatedCart = [...cart]
     const existingItemIndex = updatedCart.findIndex((item) => item.title === itemToRemove.title)
 
@@ -44,5 +51,3 @@ function useCart() {
 
   return { cart, addToCart, removeFromCart }
 }
-
-export default useCart
