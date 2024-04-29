@@ -10,7 +10,6 @@ export default function CartPage() {
 
   console.log(JSON.stringify(cart))
 
-  // hanndle purchase now
   const handlePurchase = async () => {
     const response = await fetch("/api/payment", {
       method: "POST",
@@ -51,6 +50,11 @@ export default function CartPage() {
             </div>
           </div>
         ))}
+      </div>
+
+      <div className="flex justify-between mt-10">
+        <Text size="lg">Total</Text>
+        <Text size="lg">{new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR" }).format(cart.reduce((total, item) => total + item.price * item.quantity, 0))}</Text>
       </div>
 
       <div className="flex justify-center gap-5 mt-5">
